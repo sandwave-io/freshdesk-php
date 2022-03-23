@@ -1,5 +1,5 @@
 {
-  "name": "sandwave-io/freshdeshk-php",
+  "name": "sandwave-io/freshdesk-php",
   "description": "A PHP SDK for the Freshdesk REST API.",
   "type": "library",
   "license": "MIT",
