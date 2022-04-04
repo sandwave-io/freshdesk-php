@@ -6,6 +6,7 @@ namespace SandwaveIo\Freshdesk;
 
 use SandwaveIo\Freshdesk\Client\CompanyClient;
 use SandwaveIo\Freshdesk\Client\ContactClient;
+use SandwaveIo\Freshdesk\Client\GroupClient;
 use SandwaveIo\Freshdesk\Client\ProductClient;
 use SandwaveIo\Freshdesk\Client\RestClientInterface;
 use SandwaveIo\Freshdesk\Client\TicketClient;
@@ -15,6 +16,8 @@ final class FreshdeskClient
     private TicketClient $ticketClient;
 
     private ContactClient $contactClient;
+
+    private GroupClient $groupClient;
 
     private ProductClient $productClient;
 
@@ -35,6 +38,11 @@ final class FreshdeskClient
         return $this->contactClient;
     }
 
+    public function getGroupClient(): GroupClient
+    {
+        return $this->groupClient;
+    }
+
     public function getProductClient(): ProductClient
     {
         return $this->productClient;
@@ -49,6 +57,7 @@ final class FreshdeskClient
     {
         $this->ticketClient = new TicketClient($client);
         $this->contactClient = new ContactClient($client);
+        $this->groupClient = new GroupClient($client);
         $this->productClient = new ProductClient($client);
         $this->companyClient = new CompanyClient($client);
     }
