@@ -17,7 +17,7 @@ final class FreshdeskClient
     private ContactClient $contactClient;
 
     private ProductClient $productClient;
-  
+
     private CompanyClient $companyClient;
 
     public function __construct(RestClientInterface $restClient)
@@ -39,7 +39,7 @@ final class FreshdeskClient
     {
         return $this->productClient;
     }
-      
+
     public function getCompanyClient(): CompanyClient
     {
         return $this->companyClient;
