@@ -14,6 +14,8 @@ This SDK currently supports these APIs:
 
 * [Ticket API](https://developers.freshdesk.com/api/#tickets)
 * [Contacts API](https://developers.freshdesk.com/api/#contacts)
+* [Products API](https://developers.freshdesk.com/api/#products)
+* [Companies API](https://developers.freshdesk.com/api/#companies)
 
 Are you missing functionality? Feel free to create an issue, or hit us up with a pull request.
 
