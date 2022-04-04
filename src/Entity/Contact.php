@@ -197,7 +197,7 @@ class Contact
     /**
      * Additional companies associated with the contact.
      *
-     * @var Company[]null
+     * @var Company[]|null
      * @Serializer\SerializedName("other_companies")
      * @Serializer\Type("array<SandwaveIo\Freshdesk\ValueObject\Company>")
      * @Serializer\Groups({"read", "update", "create"})
