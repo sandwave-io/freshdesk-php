@@ -12,7 +12,9 @@ use SandwaveIo\Freshdesk\Client\TicketClient;
 final class FreshdeskClient
 {
     private TicketClient $ticketClient;
+
     private ContactClient $contactClient;
+
     private CompanyClient $companyClient;
 
     public function __construct(RestClientInterface $restClient)
