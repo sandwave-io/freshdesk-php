@@ -16,6 +16,7 @@ This SDK currently supports these APIs:
 * [Contacts API](https://developers.freshdesk.com/api/#contacts)
 * [Products API](https://developers.freshdesk.com/api/#products)
 * [Companies API](https://developers.freshdesk.com/api/#companies)
+* [Groups API](https://developers.freshdesk.com/api/#groups)
 
 Are you missing functionality? Feel free to create an issue, or hit us up with a pull request.
 
