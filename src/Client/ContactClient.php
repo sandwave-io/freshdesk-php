@@ -30,17 +30,17 @@ final class ContactClient
     /**
      * @throws FreshdeskException
      */
-    public function update(int $contactId, Contact $ticket): Contact
+    public function update(int $contactId, Contact $contact): Contact
     {
-        return $this->client->put(sprintf(self::URL_CONTACT_ID, $contactId), $ticket, Contact::class);
+        return $this->client->put(sprintf(self::URL_CONTACT_ID, $contactId), $contact, Contact::class);
     }
 
     /**
      * @throws FreshdeskException
      */
-    public function create(Contact $ticket): Contact
+    public function create(Contact $contact): Contact
     {
-        return $this->client->post(self::URL_CONTACT, $ticket, Contact::class);
+        return $this->client->post(self::URL_CONTACT, $contact, Contact::class);
     }
 
     /**
