@@ -129,7 +129,7 @@ class Company
      * @var array|null
      * @Serializer\SerializedName("custom_fields")
      * @Serializer\Type("array")
-     * @Serializer\Groups({"read"})
+     * @Serializer\Groups({"read", "update", "create"})
      */
     public ?array $customFields = null;
 }

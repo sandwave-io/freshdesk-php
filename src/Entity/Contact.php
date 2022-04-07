@@ -57,12 +57,12 @@ class Contact
     /**
      * Set to true if the contact can see all tickets that are associated with the company to which he belong.
      *
-     * @var bool
+     * @var bool|null
      * @Serializer\SerializedName("view_all_tickets")
      * @Serializer\Type("bool")
      * @Serializer\Groups({"read", "update", "create"})
      */
-    public bool $canViewAllTickets = false;
+    public ?bool $canViewAllTickets = false;
 
     /**
      * Set to true if the contact has been deleted. Note that this attribute will only be present for deleted contacts.
@@ -241,7 +241,7 @@ class Contact
      * @var array|null
      * @Serializer\SerializedName("custom_fields")
      * @Serializer\Type("array")
-     * @Serializer\Groups({"read"})
+     * @Serializer\Groups({"read", "update", "create"})
      */
     public ?array $customFields = null;
 }
