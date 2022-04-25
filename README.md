@@ -39,10 +39,14 @@ $factory = new RestClientFactory(
     'API key',
 );
 
+// The logger is optional
+$logger = new YourFavoritePSRLogger();
+
 $serializer = SerializerFactory::create();
 $restClient = new RestClient(
     $factory->create(),
-    $serializer
+    $serializer,
+    $logger
 );
 
 $freshdeskClient = new FreshdeskClient($restClient);
