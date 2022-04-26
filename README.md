@@ -39,7 +39,7 @@ $factory = new RestClientFactory(
     'API key',
 );
 
-// The logger is optional
+// The optional logger should implement \Psr\Log\LoggerInterface
 $logger = new YourFavoritePSRLogger();
 
 $serializer = SerializerFactory::create();
