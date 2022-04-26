@@ -8,14 +8,16 @@ use Exception;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Exception\TooManyRedirectsException;
-use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\RequestOptions;
 use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use ReflectionClass;
 use ReflectionException;
 use SandwaveIo\Freshdesk\Exception\BadRequestException;
@@ -35,10 +37,13 @@ final class RestClient implements RestClientInterface
 
     private SerializerInterface $serializer;
 
-    public function __construct(ClientInterface $client, SerializerInterface $serializer)
+    private LoggerInterface $logger;
+
+    public function __construct(ClientInterface $client, SerializerInterface $serializer, ?LoggerInterface $logger = null)
     {
         $this->client = $client;
         $this->serializer = $serializer;
+        $this->logger = $logger ?? new NullLogger();
     }
 
     /**
@@ -56,7 +61,7 @@ final class RestClient implements RestClientInterface
     {
         $this->assertValidClass($returnType);
         $response = $this->request('GET', $url);
-        $json = $response->getBody()->getContents();
+        $json = (string) $response->getBody();
 
         return $this->serializer->deserialize($json, $returnType, 'json', DeserializationContext::create()->setGroups(['read']));
     }
@@ -82,7 +87,7 @@ final class RestClient implements RestClientInterface
             ],
         ]);
 
-        return $this->serializer->deserialize($response->getBody()->getContents(), $returnType, 'json');
+        return $this->serializer->deserialize((string) $response->getBody(), $returnType, 'json');
     }
 
     /**
@@ -106,7 +111,7 @@ final class RestClient implements RestClientInterface
             ],
         ]);
 
-        return $this->serializer->deserialize($response->getBody()->getContents(), $returnType, 'json');
+        return $this->serializer->deserialize((string) $response->getBody(), $returnType, 'json');
     }
 
     public function delete(string $url): void
@@ -126,13 +131,56 @@ final class RestClient implements RestClientInterface
      */
     public function request(string $method, string $url, array $options = []): ResponseInterface
     {
+        $this->client->getConfig();
+
+        $logContext = [
+            'body' => $options['body'] ?? null,
+            'method' => $method,
+            'url' => $url,
+        ];
+
+        if (isset($options['body'])) {
+            $logContext['body'] = $options['body'];
+        }
+        $logMessage = sprintf('Freshdesk.REQUEST: %s %s', $method, $url);
+
+        $this->logger->debug($logMessage, $logContext);
+
         try {
             $response = $this->client->request($method, $url, array_merge($options, $this->getRequestOptions()));
-        } catch (TransferException $exception) {
+        } catch (ConnectException $exception) {
+            $logMessage = sprintf('Freshdesk.ERROR: %s', $exception->getMessage());
+            $this->logger->notice($logMessage);
+
+            throw $this->convertException($exception);
+        } catch (RequestException $exception) {
+            $response = $exception->getResponse();
+            if ($response instanceof ResponseInterface) {
+                $this->logResponse($response);
+            }
             throw $this->convertException($exception);
         }
 
+        $this->logResponse($response);
+
         return $response;
+    }
+
+    private function logResponse(ResponseInterface $response): void
+    {
+        $logMessage = sprintf(
+            'Freshdesk.RESPONSE: %s - BODY: %s',
+            $response->getStatusCode(),
+            $response->getBody()
+        );
+
+        $logContext = [
+            'response_code' => $response->getStatusCode(),
+            'response_body' => (string) $response->getBody(),
+            'response_headers' => $response->getHeaders(),
+        ];
+
+        $this->logger->debug($logMessage, $logContext);
     }
 
     private function getRequestOptions(): array
