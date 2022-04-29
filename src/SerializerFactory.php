@@ -9,6 +9,7 @@ use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
 use MyCLabs\Enum\Enum;
+use SandwaveIo\Freshdesk\ValueObject\Dictionary;
 
 class SerializerFactory
 {
@@ -33,6 +34,24 @@ class SerializerFactory
                 function ($visitor, $data, array $type) {
                     $class = $type['params'][0];
                     return new $class($data);
+                }
+            );
+
+            $registry->registerHandler(
+                GraphNavigatorInterface::DIRECTION_SERIALIZATION,
+                Dictionary::class,
+                'json',
+                function ($visitor, Dictionary $object, array $type) {
+                    return $object->toObject();
+                }
+            );
+
+            $registry->registerHandler(
+                GraphNavigatorInterface::DIRECTION_DESERIALIZATION,
+                Dictionary::class,
+                'json',
+                function ($visitor, $data, array $type) {
+                    return new Dictionary($data);
                 }
             );
         });

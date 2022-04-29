@@ -12,6 +12,7 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use SandwaveIo\Freshdesk\Client\RestClient;
+use SandwaveIo\Freshdesk\ValueObject\Dictionary;
 use SandwaveIo\Freshdesk\Entity\Ticket;
 use SandwaveIo\Freshdesk\Enum\TicketPriority;
 use SandwaveIo\Freshdesk\Enum\TicketSource;
@@ -48,6 +49,7 @@ class TicketClientTest extends TestCase
         $ticket->id = 14;
         $ticket->status = TicketStatus::PENDING();
         $ticket->descriptionText = 'shouldnotbeused';
+        $ticket->customFields = new Dictionary(['cf_customkey1' => 'value', 'cf_customkey2' => true]);
 
         $mockHandler = new MockHandler(
             [new Response(200, [], $jsonResponse)]
@@ -63,6 +65,8 @@ class TicketClientTest extends TestCase
                 self::assertArrayNotHasKey('description_text', $decoded);
 
                 self::assertSame($ticket->status->getValue(), TicketStatus::PENDING()->getValue());
+
+                self::assertSame($ticket->customFields->toArray(), $decoded['custom_fields']);
 
                 return $handler($request, $options);
             };
@@ -86,6 +90,7 @@ class TicketClientTest extends TestCase
         $ticket->id = 14;
         $ticket->status = TicketStatus::PENDING();
         $ticket->descriptionText = 'shouldnotbeused';
+        $ticket->customFields = new Dictionary(['cf_customkey1' => 'value', 'cf_customkey2' => true]);
 
         $mockHandler = new MockHandler(
             [new Response(200, [], $jsonResponse)]
@@ -101,6 +106,8 @@ class TicketClientTest extends TestCase
                 self::assertArrayNotHasKey('description_text', $decoded);
 
                 self::assertSame($ticket->status->getValue(), TicketStatus::PENDING()->getValue());
+
+                self::assertSame($ticket->customFields->toArray(), $decoded['custom_fields']);
 
                 return $handler($request, $options);
             };
@@ -172,5 +179,12 @@ class TicketClientTest extends TestCase
 
         self::assertSame('2022-02-22 10:03:42', $ticket->createdAt->format('Y-m-d H:i:s'));
         self::assertSame('2022-02-22 18:13:11', $ticket->updatedAt->format('Y-m-d H:i:s'));
+
+        $customFields = [
+            'cf_custom1' => false,
+            'cf_custom2' => 'Custom value',
+        ];
+        self::assertInstanceOf(Dictionary::class, $ticket->customFields);
+        self::assertSame($customFields, $ticket->customFields->toArray());
     }
 }
