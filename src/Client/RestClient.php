@@ -87,7 +87,7 @@ final class RestClient implements RestClientInterface
             ],
         ]);
 
-        return $this->serializer->deserialize((string) $response->getBody(), $returnType, 'json');
+        return $this->serializer->deserialize((string) $response->getBody(), $returnType, 'json', DeserializationContext::create()->setGroups(['read']));
     }
 
     /**
@@ -111,7 +111,7 @@ final class RestClient implements RestClientInterface
             ],
         ]);
 
-        return $this->serializer->deserialize((string) $response->getBody(), $returnType, 'json');
+        return $this->serializer->deserialize((string) $response->getBody(), $returnType, 'json', DeserializationContext::create()->setGroups(['read']));
     }
 
     public function delete(string $url): void

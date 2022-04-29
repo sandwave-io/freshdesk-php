@@ -6,6 +6,7 @@ namespace SandwaveIo\Freshdesk\Entity;
 
 use DateTimeImmutable;
 use JMS\Serializer\Annotation as Serializer;
+use SandwaveIo\Freshdesk\ValueObject\Dictionary;
 use SandwaveIo\Freshdesk\Enum\TicketPriority;
 use SandwaveIo\Freshdesk\Enum\TicketSource;
 use SandwaveIo\Freshdesk\Enum\TicketStatus;
@@ -364,4 +365,12 @@ class Ticket
      * @Serializer\Groups({"read"})
      */
     public ?DateTimeImmutable $createdAt = null;
+
+    /**
+     * @Serializer\SerializedName("custom_fields")
+     * @Serializer\Type("SandwaveIo\Freshdesk\ValueObject\Dictionary")
+     * @Serializer\Groups({"read", "update", "create"})
+     * @var \SandwaveIo\Freshdesk\ValueObject\Dictionary|null
+     */
+    public ?Dictionary $customFields = null;
 }
