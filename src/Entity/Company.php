@@ -16,8 +16,11 @@ class Company
      * Description of the company.
      *
      * @var string|null
+     *
      * @Serializer\SerializedName("description")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?string $description = null;
@@ -26,8 +29,11 @@ class Company
      * Domains of the company. Email addresses of contacts that contain this domain will be associated with that company automatically.
      *
      * @var string[]|null
+     *
      * @Serializer\SerializedName("domains")
+     *
      * @Serializer\Type("array")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?array $domains = null;
@@ -36,8 +42,11 @@ class Company
      * Unique ID of the company.
      *
      * @var int|null
+     *
      * @Serializer\SerializedName("id")
+     *
      * @Serializer\Type("int")
+     *
      * @Serializer\Groups({"read"})
      */
     public ?int $id;
@@ -46,8 +55,11 @@ class Company
      * Any specific note about the company.
      *
      * @var string|null
+     *
      * @Serializer\SerializedName("note")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?string $note = null;
@@ -56,8 +68,11 @@ class Company
      * The strength of your relationship with the company.
      *
      * @var string|null
+     *
      * @Serializer\SerializedName("health_score")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?string $healthScore = null;
@@ -66,8 +81,11 @@ class Company
      * Classification based on how much value the company brings to your business.
      *
      * @var string|null
+     *
      * @Serializer\SerializedName("account_tier")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?string $accountTier = null;
@@ -76,8 +94,11 @@ class Company
      * Name of the company.
      *
      * @var string|null
+     *
      * @Serializer\SerializedName("name")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?string $name;
@@ -86,8 +107,11 @@ class Company
      * The industry the company serves in.
      *
      * @var string|null
+     *
      * @Serializer\SerializedName("industry")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?string $industry = null;
@@ -96,8 +120,11 @@ class Company
      * Company creation timestamp.
      *
      * @var DateTimeImmutable|null
+     *
      * @Serializer\SerializedName("created_at")
+     *
      * @Serializer\Type("DateTimeImmutable")
+     *
      * @Serializer\Groups({"read"})
      */
     public ?DateTimeImmutable $createdAt = null;
@@ -106,8 +133,11 @@ class Company
      * Company updated timestamp.
      *
      * @var DateTimeImmutable|null
+     *
      * @Serializer\SerializedName("updated_at")
+     *
      * @Serializer\Type("DateTimeImmutable")
+     *
      * @Serializer\Groups({"read"})
      */
     public ?DateTimeImmutable $updatedAt = null;
@@ -116,8 +146,11 @@ class Company
      * Date when your contract or relationship with the company is due for renewal.
      *
      * @var DateTimeImmutable|null
+     *
      * @Serializer\SerializedName("renewal_date")
+     *
      * @Serializer\Type("DateTimeImmutable")
+     *
      * @Serializer\Groups({"read"})
      */
     public ?DateTimeImmutable $renewalDate = null;
@@ -127,8 +160,11 @@ class Company
      * Only dates in the format YYYY-MM-DD are accepted as input for custom date fields.
      *
      * @var array|null
+     *
      * @Serializer\SerializedName("custom_fields")
+     *
      * @Serializer\Type("array")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?array $customFields = null;

@@ -12,13 +12,13 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use SandwaveIo\Freshdesk\Client\RestClient;
-use SandwaveIo\Freshdesk\ValueObject\Dictionary;
 use SandwaveIo\Freshdesk\Entity\Ticket;
 use SandwaveIo\Freshdesk\Enum\TicketPriority;
 use SandwaveIo\Freshdesk\Enum\TicketSource;
 use SandwaveIo\Freshdesk\Enum\TicketStatus;
 use SandwaveIo\Freshdesk\FreshdeskClient;
 use SandwaveIo\Freshdesk\SerializerFactory;
+use SandwaveIo\Freshdesk\ValueObject\Dictionary;
 
 class TicketClientTest extends TestCase
 {

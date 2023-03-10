@@ -18,8 +18,11 @@ class Group
      * @see https://support.freshdesk.com/support/solutions/articles/197883-finding-user-id-responder-id-of
      *
      * @var int[]|null
+     *
      * @Serializer\SerializedName("agent_ids")
+     *
      * @Serializer\Type("array")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?array $agentIds = null;
@@ -30,8 +33,11 @@ class Group
      * The accepted values are 0 and 1. The default value is 0.
      *
      * @var int|null
+     *
      * @Serializer\SerializedName("auto_ticket_assign")
+     *
      * @Serializer\Type("int")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?int $autoTicketAssign = 0;
@@ -40,8 +46,11 @@ class Group
      * Unique ID of the business hour associated with the group.
      *
      * @var int|null
+     *
      * @Serializer\SerializedName("business_hour_id")
+     *
      * @Serializer\Type("int")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?int $businessHourId = null;
@@ -50,8 +59,11 @@ class Group
      * Description of the group.
      *
      * @var string|null
+     *
      * @Serializer\SerializedName("description")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?string $description = null;
@@ -61,8 +73,11 @@ class Group
      * To create/update a group with an escalate_to value of 'none', please set the value of this parameter to 'null'.
      *
      * @var int|null
+     *
      * @Serializer\SerializedName("escalate_to")
+     *
      * @Serializer\Type("int")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?int $escalateTo = null;
@@ -71,8 +86,11 @@ class Group
      * Unique ID of the group.
      *
      * @var int|null
+     *
      * @Serializer\SerializedName("id")
+     *
      * @Serializer\Type("int")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?int $id;
@@ -81,8 +99,11 @@ class Group
      * Name of the group.
      *
      * @var string|null
+     *
      * @Serializer\SerializedName("name")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?string $name = null;
@@ -94,8 +115,11 @@ class Group
      * "2d" for 2 days, and "3d" for 3 days.
      *
      * @var string|null
+     *
      * @Serializer\SerializedName("unassigned_for")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?string $unassignedFor = null;
@@ -104,8 +128,11 @@ class Group
      * Group creation timestamp.
      *
      * @var DateTimeImmutable|null
+     *
      * @Serializer\SerializedName("created_at")
+     *
      * @Serializer\Type("DateTimeImmutable")
+     *
      * @Serializer\Groups({"read"})
      */
     public ?DateTimeImmutable $createdAt;
@@ -114,8 +141,11 @@ class Group
      * Group updated timestamp.
      *
      * @var DateTimeImmutable|null
+     *
      * @Serializer\SerializedName("updated_at")
+     *
      * @Serializer\Type("DateTimeImmutable")
+     *
      * @Serializer\Groups({"read"})
      */
     public ?DateTimeImmutable $updatedAt;

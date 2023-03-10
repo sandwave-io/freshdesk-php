@@ -16,8 +16,11 @@ class Product
      * Description of the product.
      *
      * @var string|null
+     *
      * @Serializer\SerializedName("description")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?string $description = null;
@@ -26,8 +29,11 @@ class Product
      * Unique ID of the product.
      *
      * @var int|null
+     *
      * @Serializer\SerializedName("id")
+     *
      * @Serializer\Type("int")
+     *
      * @Serializer\Groups({"read"})
      */
     public ?int $id;
@@ -36,8 +42,11 @@ class Product
      * Name of the product.
      *
      * @var string|null
+     *
      * @Serializer\SerializedName("name")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"read", "update", "create"})
      */
     public ?string $name = null;
@@ -46,8 +55,11 @@ class Product
      * Product creation timestamp.
      *
      * @var DateTimeImmutable|null
+     *
      * @Serializer\SerializedName("created_at")
+     *
      * @Serializer\Type("DateTimeImmutable")
+     *
      * @Serializer\Groups({"read"})
      */
     public ?DateTimeImmutable $createdAt = null;
@@ -56,8 +68,11 @@ class Product
      * Product updated timestamp.
      *
      * @var DateTimeImmutable|null
+     *
      * @Serializer\SerializedName("updated_at")
+     *
      * @Serializer\Type("DateTimeImmutable")
+     *
      * @Serializer\Groups({"read"})
      */
     public ?DateTimeImmutable $updatedAt = null;
