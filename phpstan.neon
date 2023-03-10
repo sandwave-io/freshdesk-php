@@ -14,3 +14,10 @@ parameters:
         -
             function: 'print_r()'
             message: 'use logger instead'
+    ignoreErrors:
+        -
+            message: '#^Constant [a-zA-Z0-9\\_]+::[A-Z_]+ is unused\.$#'
+            path: src/Enum/*
+        -
+            message: '#Dead catch \- ReflectionException is never thrown in the try block.#'
+            path: src/Client/RestClient.php
