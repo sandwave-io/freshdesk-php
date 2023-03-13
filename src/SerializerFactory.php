@@ -4,11 +4,12 @@ declare(strict_types = 1);
 
 namespace SandwaveIo\Freshdesk;
 
+use BackedEnum;
 use JMS\Serializer\GraphNavigatorInterface;
 use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
-use MyCLabs\Enum\Enum;
+use JMS\Serializer\VisitorInterface;
 use SandwaveIo\Freshdesk\ValueObject\Dictionary;
 
 class SerializerFactory
@@ -22,8 +23,8 @@ class SerializerFactory
                 GraphNavigatorInterface::DIRECTION_SERIALIZATION,
                 'Enum',
                 'json',
-                function ($visitor, Enum $object, array $type) {
-                    return $object->getValue();
+                function (VisitorInterface $visitor, BackedEnum $object, array $type) {
+                    return $object->value;
                 }
             );
 
@@ -31,9 +32,9 @@ class SerializerFactory
                 GraphNavigatorInterface::DIRECTION_DESERIALIZATION,
                 'Enum',
                 'json',
-                function ($visitor, $data, array $type) {
+                function (VisitorInterface $visitor, mixed $data, array $type) {
                     $class = $type['params'][0];
-                    return new $class($data);
+                    return $class::tryFrom($data);
                 }
             );
 
@@ -41,7 +42,7 @@ class SerializerFactory
                 GraphNavigatorInterface::DIRECTION_SERIALIZATION,
                 Dictionary::class,
                 'json',
-                function ($visitor, Dictionary $object, array $type) {
+                function (VisitorInterface $visitor, Dictionary $object, array $type) {
                     return $object->toObject();
                 }
             );
@@ -50,7 +51,7 @@ class SerializerFactory
                 GraphNavigatorInterface::DIRECTION_DESERIALIZATION,
                 Dictionary::class,
                 'json',
-                function ($visitor, $data, array $type) {
+                function (VisitorInterface $visitor, mixed $data, array $type) {
                     return new Dictionary($data);
                 }
             );

@@ -14,7 +14,7 @@ class EnumSerializerHandlerTest extends TestCase
     public function testSerializer(): void
     {
         $object = new Ticket();
-        $object->status = TicketStatus::OPEN();
+        $object->status = TicketStatus::OPEN;
 
         $serializer = SerializerFactory::create();
         $serialized = $serializer->serialize($object, 'json');
@@ -22,19 +22,19 @@ class EnumSerializerHandlerTest extends TestCase
         self::assertJson($serialized);
 
         $deserialized = json_decode($serialized, false, 512, JSON_THROW_ON_ERROR);
-        self::assertSame(TicketStatus::OPEN()->getValue(), $deserialized->status);
+        self::assertSame(TicketStatus::OPEN->value, $deserialized->status);
     }
 
     public function testDeserializer(): void
     {
         $object = new Ticket();
-        $object->status = TicketStatus::OPEN();
+        $object->status = TicketStatus::OPEN;
 
         $serialized = json_encode($object, JSON_THROW_ON_ERROR);
 
         $serializer = SerializerFactory::create();
         $deserialized = $serializer->deserialize($serialized, Ticket::class, 'json');
 
-        self::assertSame(TicketStatus::OPEN()->getValue(), $deserialized->status->getValue());
+        self::assertSame(TicketStatus::OPEN, $deserialized->status);
     }
 }

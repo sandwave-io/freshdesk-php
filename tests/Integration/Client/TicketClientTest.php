@@ -47,7 +47,7 @@ class TicketClientTest extends TestCase
 
         $ticket = new Ticket();
         $ticket->id = 14;
-        $ticket->status = TicketStatus::PENDING();
+        $ticket->status = TicketStatus::PENDING;
         $ticket->descriptionText = 'shouldnotbeused';
         $ticket->customFields = new Dictionary(['cf_customkey1' => 'value', 'cf_customkey2' => true]);
 
@@ -64,7 +64,7 @@ class TicketClientTest extends TestCase
                 self::assertArrayHasKey('status', $decoded);
                 self::assertArrayNotHasKey('description_text', $decoded);
 
-                self::assertSame($ticket->status->getValue(), TicketStatus::PENDING()->getValue());
+                self::assertSame($ticket->status, TicketStatus::PENDING);
 
                 self::assertSame($ticket->customFields->toArray(), $decoded['custom_fields']);
 
@@ -88,7 +88,7 @@ class TicketClientTest extends TestCase
 
         $ticket = new Ticket();
         $ticket->id = 14;
-        $ticket->status = TicketStatus::PENDING();
+        $ticket->status = TicketStatus::PENDING;
         $ticket->descriptionText = 'shouldnotbeused';
         $ticket->customFields = new Dictionary(['cf_customkey1' => 'value', 'cf_customkey2' => true]);
 
@@ -105,7 +105,7 @@ class TicketClientTest extends TestCase
                 self::assertArrayHasKey('status', $decoded);
                 self::assertArrayNotHasKey('description_text', $decoded);
 
-                self::assertSame($ticket->status->getValue(), TicketStatus::PENDING()->getValue());
+                self::assertSame($ticket->status, TicketStatus::PENDING);
 
                 self::assertSame($ticket->customFields->toArray(), $decoded['custom_fields']);
 
@@ -170,9 +170,9 @@ class TicketClientTest extends TestCase
         self::assertInstanceOf(TicketStatus::class, $ticket->status);
         self::assertInstanceOf(TicketSource::class, $ticket->source);
 
-        self::assertSame(TicketPriority::LOW()->getValue(), $ticket->priority->getValue());
-        self::assertSame(TicketStatus::OPEN()->getValue(), $ticket->status->getValue());
-        self::assertSame(TicketSource::PHONE()->getValue(), $ticket->source->getValue());
+        self::assertSame(TicketPriority::LOW, $ticket->priority);
+        self::assertSame(TicketStatus::OPEN, $ticket->status);
+        self::assertSame(TicketSource::PHONE, $ticket->source);
 
         self::assertInstanceOf(DateTimeImmutable::class, $ticket->createdAt);
         self::assertInstanceOf(DateTimeImmutable::class, $ticket->updatedAt);
