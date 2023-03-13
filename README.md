@@ -3,7 +3,7 @@
 
 # Freshdesk API - PHP SDK
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/sandwave-io/freshdesk-php/CI)](https://packagist.org/packages/sandwave-io/freshdesk-php)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/sandwave-io/freshdesk-php/ci.yml?branch=main)](https://packagist.org/packages/sandwave-io/freshdesk-php)
 [![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/sandwave-io/freshdesk-php)](https://packagist.org/packages/sandwave-io/freshdesk-php)
 [![Packagist PHP Version Support](https://img.shields.io/packagist/v/sandwave-io/freshdesk-php)](https://packagist.org/packages/sandwave-io/freshdesk-php)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/sandwave-io/freshdesk-php)](https://packagist.org/packages/sandwave-io/freshdesk-php)
